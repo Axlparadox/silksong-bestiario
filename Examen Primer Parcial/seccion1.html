@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Hollow Knight: Silksong - Bestiario Acto 1</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap" rel="stylesheet">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Cinzel', serif;
+            background-image: url(imagenes/fondo_pharloom.jpg);
+            background-position: left;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-size: cover;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: #f2f2f2;
+        }
+
+        #contenedor_general {
+            width: 1567px;
+            margin: 0 0 0 auto;
+            background-color: rgba(30, 30, 30, 0.95);
+            border: 2px solid #990000;
+            border-radius: 10px;
+            overflow: hidden;
+            flex-grow: 1;
+            position: relative;
+            box-shadow: 0 0 35px rgba(0,0,0,0.8);
+        }
+
+        header {
+            text-align: center;
+            background-image: linear-gradient(to bottom, black, rgba(0,0,0,0));
+            padding: 25px 0;
+            position: relative;
+        }
+        header img.logo {
+            max-width: 80%;
+            height: auto;
+            filter: drop-shadow(0px 0px 15px rgba(255, 255, 255, 0.6));
+            margin-bottom: 15px;
+        }
+        header h1.titulo {
+            background-color: rgba(0, 0, 0, 0.7);
+            display: inline-block;
+            padding: 10px 40px;
+            border: 2px solid #990000;
+            box-shadow: 0px 0px 15px #990000;
+            border-radius: 5px;
+            font-family: sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #FFF;
+            font-size: 1.3em;
+            margin-top: 5px;
+        }
+
+        #btn_menu_interruptor { display: none; }
+        
+        .btn_hamburguesa_visual {
+            display: block;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(153, 0, 0, 0.8);
+            color: #FFF;
+            padding: 12px 18px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 1em;
+            font-family: sans-serif;
+            font-weight: bold;
+            text-transform: uppercase;
+            z-index: 20;
+        }
+        .btn_hamburguesa_visual::before { content: "≡ Menu "; }
+
+        nav#menu_desplegable {
+            display: none;
+            position: absolute;
+            top: 100px;
+            right: 20px;
+            width: 280px;
+            z-index: 10;
+        }
+        nav#menu_desplegable ul {
+            list-style: none;
+            background-color: rgba(0,0,0,0.95);
+            border-radius: 5px;
+            padding: 15px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.8);
+        }
+        nav#menu_desplegable ul li { margin-bottom: 10px; }
+        nav#menu_desplegable ul li a {
+            display: block;
+            background-color: #FFF;
+            color: #000;
+            padding: 15px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.95em;
+            transition: background-color 0.3s;
+        }
+        nav#menu_desplegable ul li a:hover {
+            background-color: #e0e0e0;
+        }
+
+        #btn_menu_interruptor:checked ~ nav#menu_desplegable {
+            display: block;
+        }
+
+        #contenido_principal {
+            padding: 40px 60px;
+        }
+
+        h2.titulo-acto {
+            font-size: 2.5em;
+            color: #FFF;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 1px solid #FFF;
+            padding-bottom: 15px;
+            margin-bottom: 40px;
+        }
+
+        .galeria-jefes {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 50px 20px; /* Un poco más de espacio vertical entre filas */
+        }
+
+        /* AJUSTE MAGICO: Usar flexbox dentro de cada celda para alinear al fondo */
+        .jefe {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end; /* Empuja el contenido hacia abajo */
+            align-items: center; /* Centra horizontalmente */
+            text-align: center;
+            height: 100%; /* Toma toda la altura de la celda del grid */
+        }
+
+        .jefe img {
+            max-width: 100%;
+            height: auto;
+            margin-top: auto; /* Empuja la imagen hacia la "base" del contenedor */
+            transition: transform 0.3s ease;
+            filter: drop-shadow(0px 10px 15px rgba(0,0,0,0.6));
+        }
+
+        .jefe img:hover {
+            transform: scale(1.15);
+        }
+
+        .jefe p {
+            color: #cc6633;
+            margin-top: 15px;
+            font-size: 1.1em;
+            letter-spacing: 1px;
+            font-weight: bold;
+            text-transform: uppercase;
+            width: 100%;
+        }
+
+        footer {
+            background-color: #990000;
+            text-align: center;
+            color: #FFF;
+            padding: 30px 25px;
+            margin-top: auto;
+        }
+        footer p.redes-titulo {
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+        footer div.iconos-redes a {
+            display: inline-block;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        footer div.iconos-redes img {
+            width: 45px;
+            height: 45px;
+            filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.4));
+            transition: transform 0.3s;
+        }
+        footer div.iconos-redes img:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="contenedor_general">
+        
+      <label for="btn_menu_interruptor" class="btn_hamburguesa_visual"></label>
+        <input type="checkbox" id="btn_menu_interruptor">
+
+        <header>
+            <img src="imagenes/logo_silksong.png" alt="Hollow Knight: Silksong Logo" class="logo">
+            <br>
+            <h1 class="titulo">Jefes Act 1&nbsp;</h1>
+        </header>
+
+        <nav id="menu_desplegable">
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="seccion1.html">Jefes Act 1</a></li>
+                <li><a href="seccion2.html">Jefes Act 2</a></li>
+                <li><a href="seccion3.html">Jefes Act 3</a></li>
+          </ul>
+      </nav>
+
+        <div id="contenido_principal">
+            
+            <h2 class="titulo-acto">ACTO 1</h2>
+
+            <div class="galeria-jefes">
+                
+                <div class="jefe">
+                    <img src="imagenes/bosses_photoshop/Acto1/act1_bell_beast.png" alt="Bell Beast">
+                    <p>Bell Beast</p>
+                </div>
+                <div class="jefe">
+                    <img src="imagenes/bosses_photoshop/Acto1/act1_savage_beastfly.png" alt="Savage Beastfly">
+                    <p>Savage Beastfly</p>
+                </div>
+                <div class="jefe">
+                    <img src="imagenes/bosses_photoshop/Acto1/act1_moorwing.png" alt="Moorwing">
+                    <p>Moorwing</p>
+                </div>
+                <div class="jefe">
+                  <img src="imagenes/bosses_photoshop/Acto1/act1_phantom.png" alt="Phantom">
+                    <p>Phantom</p>
+                </div>
+                <div class="jefe">
+                    <img src="imagenes/bosses_photoshop/Acto1/act1_skull_tyrant.png" alt="Skull Tyrant">
+                    <p>Skull Tyrant</p>
+                </div>
+
+                <div class="jefe">
+                    <img src="imagenes/bosses_photoshop/Acto1/act1_great_conchflies.png" alt="Great Conchflies">
+                    <p>Great Conchflies</p>
+                </div>
+                <div class="jefe">
+                    <img src="imagenes/bosses_photoshop/Acto1/act1_fourth_chorus.png" alt="Fourth Chorus">
+                    <p>Fourth Chorus</p>
+                </div>
+                <div class="jefe">
+                    <img src="imagenes/bosses_photoshop/Acto1/act1_sister_splinter.png" alt="Sister Splinter">
+                    <p>Sister Splinter</p>
+                </div>
+                <div class="jefe">
+                    <img src="imagenes/bosses_photoshop/Acto1/act1_moss_mother_1.png" alt="Moss Mother">
+                    <p>Moss Mother</p>
+                </div>
+                <div class="jefe">
+                    <img src="imagenes/bosses_photoshop/Acto1/act1_moss_mother_2.png" alt="Moss Mother">
+                    <p>Moss Mother v2</p>
+                </div>
+
+                <div class="jefe">
+                    <img src="imagenes/bosses_photoshop/Acto1/act1_last_judge.png" alt="Last Judge">
+                    <p>Last Judge</p>
+                </div>
+                <div class="jefe">
+                    <img src="imagenes/bosses_photoshop/Acto1/act1_widow.png" alt="Widow">
+                    <p>Widow</p>
+                </div>
+                <div class="jefe">
+                    <img src="imagenes/bosses_photoshop/Acto1/act1_lace.png" alt="Lace">
+                    <p>Lace</p>
+                </div>
+
+            </div> </div> <footer>
+            <p class="redes-titulo">Síguenos en redes</p>
+            <div class="iconos-redes">
+                <a href="http://www.facebook.com" target="_blank"><img src="imagenes/facebook.png" alt="Facebook icon"></a>
+                <a href="http://www.instagram.com" target="_blank"><img src="imagenes/Instagram.png" alt="Instagram icon"></a>
+                <a href="http://www.whatsapp.com" target="_blank"><img src="imagenes/Whatsapp.png" alt="WhatsApp icon"></a>
+                <a href="http://www.youtube.com" target="_blank"><img src="imagenes/Youtube.png" alt="YouTube icon"></a>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>
